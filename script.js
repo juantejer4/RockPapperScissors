@@ -1,9 +1,10 @@
-let options = ['Rock','Paper','Scissors'];
-let wins = 0;
-let loses = 0;
+options = ['Rock','Paper','Scissors'];
+wins = 0;
+loses = 0;
 
 function computerPlay(){
     let numberOfChoice = Math.round(Math.random()*2);
+    console.log(numberOfChoice);
     return options[numberOfChoice];
 }
 
@@ -13,7 +14,7 @@ function playASingleRound(playerSelection, computerSelection) {
     } else {return winnerOf(playerSelection,computerSelection);}
 }
 
-//It only excecutes if two differents elements are chosen
+//It only excecutes if two differents elements were chosen
 function winnerOf(userChose,computerChose){
 
     if (userChose == 'Scissors' && computerChose == 'Paper') {
@@ -50,11 +51,20 @@ function capitalize (string) {
     return firstLetterCapitalized + choppedWord;
 }
 
+//Implements player selection
+function userPlay(){
+    const rock = document.querySelector("#rock");
+
+    rock.onclick = () => {
+        console.log('clicked');
+    }
+}
+
 function game(){
     for (let i=1;i<=5;i++) {
-        let playerC = capitalize(prompt('Select your weapon!'));
+        let playerC = userPlay();
         let computerC = computerPlay();
-        console.log(playASingleRound(playerC, computerC));
+        playASingleRound(playerC, computerC);
     }
     if (wins > loses) {
         return ('You have won!')
@@ -65,4 +75,9 @@ function game(){
     }
 }
 
-console.log(game());
+document.addEventListener("DOMContentLoaded", () => {  
+    //TODO
+    //Acá tengo que hacer la logica 
+  });
+
+

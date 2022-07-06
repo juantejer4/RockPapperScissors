@@ -1,0 +1,98 @@
+body {
+    background-color:#978b00;
+}
+
+div {
+    user-select: none;
+}
+
+button {
+    padding: 0;
+    border: 0;
+    background-color: rgb(255, 234, 0);
+    border-radius: 20px;
+    border: 3px solid black;
+    outline: none;
+}
+
+button:hover{
+    transform: scale(1.12);
+}
+
+button:active{
+    transform: scale(0.94);
+}
+
+.container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: auto auto 100% ;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+}
+
+.main-text{
+    padding: 50px 0;
+    grid-row: 1;
+}
+
+.text-letters{
+    text-align: center;
+    font-size: 6.5em;
+    color: rgb(255, 255, 255);
+    letter-spacing: -7px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
+}
+
+.text-letters:hover{
+    animation: blur 0.4s linear 1;
+}
+
+
+
+.imgs-options{
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: .3fr .3fr .3fr;
+    column-gap: 70px;
+}
+
+.imgs-options img {
+    width: 220px;
+    height: 220px;
+    border-radius: inherit;
+}
+
+
+.scoreboard-container {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    grid-template-columns: 20% auto 5px auto 20%;
+    bottom: 0;  
+}
+
+.human-score {
+    grid-column-start: 2;
+
+}
+
+.computer-score {
+    grid-column-start: 4;
+}
+
+@keyframes blur {
+    from {
+      text-shadow:0px 0px 10px #fff,
+        0px 0px 25px #fff,
+        0px 0px 50px #fff,
+        0px 0px 50px #7B96B8,
+        0px 0px 150px #7B96B8,
+        0px 10px 100px #7B96B8,
+        0px -10px 100px #7B96B8;
+    }
+  }
