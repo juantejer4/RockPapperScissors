@@ -1,10 +1,10 @@
 options = ['Rock','Paper','Scissors'];
 wins = 0;
 loses = 0;
+rounds = 0;
 
 function computerPlay(){
     let numberOfChoice = Math.round(Math.random()*2);
-    console.log(numberOfChoice);
     return options[numberOfChoice];
 }
 
@@ -19,7 +19,7 @@ function winnerOf(userChose,computerChose){
 
     if (userChose == 'Scissors' && computerChose == 'Paper') {
         wins += 1;
-        return 'You Win! Scissors beat Paper!'
+        return 'You Win! Scissors beats Paper!'
     } else if (userChose == 'Scissors') {
         loses += 1;
         return 'You Lose! Rock beats Scissors';
@@ -52,32 +52,73 @@ function capitalize (string) {
 }
 
 //Implements player selection
-function userPlay(){
-    const rock = document.querySelector("#rock");
+function userPlay(selection){
+    let playerC = selection;
+    let computerC = computerPlay();
+    let singleRoundResult = playASingleRound(playerC, computerC);
+    rounds++;
+    showRoundStats(computerC, singleRoundResult);
+    updateScore(wins,loses);
+}
+
+
+function checkResult(){
+        if (wins > loses) {
+            return ('You have won!')
+        } else if (wins === loses) {
+            return ('It\'s a Draw!')
+        } else {
+            return ('Computer wins bro!')
+        }
+}
+
+function showRoundStats(cc, srr){
+    const cchoice = document.querySelector('.choice-container');
+    cchoice.innerHTML = `<div>The computer has chosen ` + cc + `</div>
+    <div>` + srr + `</div>`;
+}
+
+function updateScore(w, l){
+    const yourScore = document.querySelector('#your-score');
+    const computerScore = document.querySelector('#computer-score');
+    yourScore.innerHTML = w;
+    computerScore.innerHTML = l;
+
+}
+
+function showWinner(r){
+    const c = document.querySelector('.choice-container');
+    c.innerHTML = `<div>` + r + `</div>`;
+}
+
+function playerSelection(option) {
+    if (rounds !== 5) {
+        userPlay(option);
+    } else {
+        let result = checkResult();
+        showWinner(result);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {  
+    const rock = document.querySelector('#rock');
+    const paper = document.querySelector('#paper');
+    const scissors = document.querySelector('#scissors');
+    const refresh = document.querySelector('#refresh');
 
     rock.onclick = () => {
-        console.log('clicked');
+        playerSelection('Rock');
     }
-}
+    paper.onclick = () => {
+        playerSelection('Paper');
+    }
+    scissors.onclick = () => {
+        playerSelection('Scissors');
+    }
 
-function game(){
-    for (let i=1;i<=5;i++) {
-        let playerC = userPlay();
-        let computerC = computerPlay();
-        playASingleRound(playerC, computerC);
+    refresh.onclick = () => {
+        location.reload();
     }
-    if (wins > loses) {
-        return ('You have won!')
-    } else if (wins === loses) {
-        return ('It\'s a Draw!')
-    } else {
-        return ('Computer wins bro!')
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {  
-    //TODO
-    //Acá tengo que hacer la logica 
   });
 
 
